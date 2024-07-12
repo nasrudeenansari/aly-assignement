@@ -33,13 +33,11 @@ export default async function Home({
   return (
     <>
       <Navbar />
-
       <Gallery
         response={response}
         initialQuery={query as string}
         totalPages={totalPages}
       />
-
       <FooterPagination
         totalPages={totalPages}
         page={Number(page) || 1}

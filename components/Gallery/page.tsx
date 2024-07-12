@@ -55,8 +55,8 @@ const Gallary: React.FC<GalleryProps> = ({
             </p>
             <Pagination totalPages={totalPages} page={page} />
           </div>
-          <ImageGrid imageData={photos} columns={3} />
 
+          <ImageGrid imageData={photos} columns={3} />
           <div className={styles.next_page_btn}>
             <button
               onClick={(e: React.MouseEvent<HTMLElement>) =>

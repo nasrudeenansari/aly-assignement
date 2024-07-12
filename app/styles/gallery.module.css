@@ -75,6 +75,9 @@
   padding: 0 4px;
 }
 
+.img_container {
+  position: relative;
+}
 .column img {
   margin-top: 8px;
   vertical-align: middle;
@@ -92,4 +95,73 @@
   .column {
     flex: 100%;
   }
+}
+
+.overlay_wrapper {
+  display: none;
+  position: absolute;
+  top: 8px;
+  color: white;
+  background-color: rgba(13, 13, 13, 0.158);
+  height: 100%;
+  width: 100%;
+  text-align: center;
+}
+
+.overlay_active {
+  display: block;
+}
+
+.hidden {
+  opacity: 0;
+}
+
+.visible {
+  opacity: 1;
+}
+
+.overlay_bottom {
+  display: flex;
+  gap: 8px;
+  position: absolute;
+  bottom: 15px;
+  right: 10px;
+}
+.overlay_bottom span {
+  background: var(--dark);
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.overlay_bottom span svg:hover {
+  fill: #fce57e;
+}
+
+.overlay_bottom span svg:hover path {
+  fill: #fce57e;
+}
+
+.overlay_bottom span svg:hover plygon {
+  fill: #fce57e;
+}
+
+.overlay_bottom span svg:hover circle {
+  fill: #fce57e;
+}
+
+.overlay_label {
+  background-color: var(--grey);
+  border-radius: 2px;
+  margin-right: 5px;
+  padding: 3px;
+  color: var(--dark);
+  font-weight: 500;
+  margin-top: 10px;
+  display: inline-block;
 }
