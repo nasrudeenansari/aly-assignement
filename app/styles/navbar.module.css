@@ -1,0 +1,36 @@
+.navbar_wrapper {
+  background: var(--dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  justify-content: space-between;
+}
+.navbar_wrapper h1 {
+  font-size: 24px;
+}
+
+.navbar_menu_wrapper {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.navbar_menu {
+  display: flex;
+}
+.list_item {
+  display: flex;
+  gap: 8px;
+}
+
+.svg_icons {
+  width: 20px;
+}
+
+.sign_btn {
+  font-weight: 700;
+  padding: 8px 16px;
+  border-radius: 5px;
+  box-sizing: border-box;
+  border: 1px solid #e5e7eb;
+}
