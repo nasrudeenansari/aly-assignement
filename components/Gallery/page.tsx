@@ -63,32 +63,61 @@ const Gallary: React.FC<GalleryProps> = ({
     setFilters((prev) => ({ ...prev, query: value }));
   };
 
+  const updatePage = (newPage: number, e: React.MouseEvent<HTMLElement>) => {
+    e.preventDefault();
+    if (newPage < 1 || newPage > totalPages) return;
+
+    const url = new URL(window.location.href);
+    url.searchParams.set("page", newPage.toString());
+
+    window.location.replace(url.toString());
+  };
+
   return (
     <>
       <SearchBar onChangeHandler={onChangeHandler} query={query} />
       <Tabs />
-      <div className={styles.gallery_wrapper}>
-        <p className={styles.result_title}>
-          <span>{query}</span> Stock Photos and Images{" "}
-          <span className={styles.result_count}>
-            ({response?.total_results})
-          </span>
-        </p>
-        <Pagination totalPages={totalPages} page={page} />
-      </div>
-      <div className={styles.image_gallery}>
-        {photos.map((item: IPhoto, idx) => (
-          <div className={styles.image_container} key={idx}>
-            <Image
-              src={item.src.original}
-              alt={item.alt}
-              width={item.width}
-              height={item.height}
-              loading="lazy"
-            />
+      {photos?.length < 1 ? (
+        <div className={styles.not_found_section}>
+          <h3>
+            Sorry, we couldn’t find any results for “sdfdsfdsfdsfdsfdsfcars”
+          </h3>
+        </div>
+      ) : (
+        <div className={styles.gallery_wrapper}>
+          <div className={styles.result_section}>
+            <p className={styles.result_title}>
+              <span>{initialQuery}</span> Stock Photos and Images{" "}
+              <span className={styles.result_count}>
+                ({response?.total_results})
+              </span>
+            </p>
+            <Pagination totalPages={totalPages} page={page} />
           </div>
-        ))}
-      </div>
+          <div className={styles.image_gallery}>
+            {photos.map((item: IPhoto, idx) => (
+              <div className={styles.image_container} key={idx}>
+                <Image
+                  src={item.src.original}
+                  alt={item.alt}
+                  width={item.width}
+                  height={item.height}
+                  loading="lazy"
+                />
+              </div>
+            ))}
+          </div>
+          <div className={styles.next_page_btn}>
+            <button
+              onClick={(e: React.MouseEvent<HTMLElement>) =>
+                updatePage(page + 1, e)
+              }
+            >
+              Next page
+            </button>
+          </div>
+        </div>
+      )}
     </>
   );
 };

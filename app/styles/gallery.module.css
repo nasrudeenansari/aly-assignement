@@ -2,11 +2,19 @@
   color: var(--dark);
   display: flex;
   align-items: center;
+  flex-direction: column;
   justify-content: space-between;
   padding: 20px;
   background-color: white;
   box-shadow: 10px;
   height: 100%;
+  border-bottom: 1px solid var(--border_color);
+}
+.result_section {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .result_title {
@@ -20,10 +28,10 @@
 
 /* src/ImageGallery.css */
 .image_gallery {
+  background-color: white;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
   gap: 10px;
-  padding: 10px;
 }
 
 .image_container {
@@ -39,4 +47,34 @@
 }
 .result_title {
   text-transform: capitalize;
+}
+
+.next_page_btn {
+  background-color: white;
+  text-align: center;
+  padding: 30px;
+}
+.next_page_btn button {
+  background: none;
+  border: 1px solid var(--dark);
+  font-size: 16px;
+  color: var(--dark);
+  padding: 10px 20px;
+  width: 200px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.next_page_btn button:hover {
+  background-color: var(--grey);
+}
+
+.not_found_section {
+  background-color: white;
+  padding: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 500px;
+  color: var(--dark);
 }

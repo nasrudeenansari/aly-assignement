@@ -1,0 +1,20 @@
+.footer_wrapper {
+  color: var(--dark);
+}
+
+.footer_top {
+  padding: 16px 24px;
+  height: 100%;
+  font-weight: 700;
+  font-size: 22px;
+  text-align: center;
+  background-color: var(--footer_color);
+}
+
+.footer_bottom {
+  background-color: var(--dark);
+  text-align: center;
+  color: white;
+  padding: 20px;
+  font-size: 16px;
+}

@@ -1,5 +1,6 @@
+import FooterPagination from "@/components/FooterPagination/page";
 import Gallery from "@/components/Gallery/page";
-import Pagination from "@/components/Pagination/page";
+import Footer from "@/components/Footer/page";
 import Navbar from "@/components/navbar/page";
 import axios from "axios";
 
@@ -38,7 +39,14 @@ export default async function Home({
         initialQuery={query as string}
         totalPages={totalPages}
       />
-      <Pagination totalPages={totalPages} page={Number(page)} />
+
+      <FooterPagination
+        totalPages={totalPages}
+        page={Number(page) || 1}
+        query={query as string}
+        total_results={response?.total_results}
+      />
+      <Footer />
     </>
   );
 }

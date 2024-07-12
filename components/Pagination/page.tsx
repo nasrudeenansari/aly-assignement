@@ -1,18 +1,16 @@
 "use client";
-import React, { MouseEvent } from "react";
+import React from "react";
 import styles from "../../app/styles/pagination.module.css";
 import { NextIcon, PrevIcon } from "@/public/icons";
+import toast from "react-hot-toast";
 
 const Pagination: React.FC<{ totalPages: number; page: number }> = ({
   totalPages,
   page,
 }) => {
-  const updatePage = (
-    newPage: number,
-    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
-  ) => {
+  const updatePage = (newPage: number, e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
-    if (isNaN(newPage) || newPage < 1 || newPage > totalPages) return;
+    if (newPage < 1 || newPage > totalPages) return;
 
     const url = new URL(window.location.href);
     url.searchParams.set("page", newPage.toString());
@@ -24,8 +22,11 @@ const Pagination: React.FC<{ totalPages: number; page: number }> = ({
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const newPage = parseInt(formData.get("page") as string);
-
-    if (isNaN(newPage) || newPage < 1 || newPage > totalPages) return;
+    if (isNaN(newPage)) {
+      toast.error("Please enter value input");
+      return;
+    }
+    if (newPage < 0 || newPage > totalPages) return;
 
     const url = new URL(window.location.href);
     url.searchParams.set("page", newPage.toString());
@@ -42,7 +43,9 @@ const Pagination: React.FC<{ totalPages: number; page: number }> = ({
         <div className={styles.navigation_btns}>
           <a
             href="/#"
-            onClick={(e) => updatePage(page - 1, e)}
+            onClick={(e: React.MouseEvent<HTMLElement>) =>
+              updatePage(page - 1, e)
+            }
             className={styles.prev_icon}
             data-testid="previous"
             aria-label="previous page"
@@ -52,7 +55,9 @@ const Pagination: React.FC<{ totalPages: number; page: number }> = ({
           <a
             href="#"
             className={styles.next_icon}
-            onClick={(e) => updatePage(page + 1, e)}
+            onClick={(e: React.MouseEvent<HTMLElement>) =>
+              updatePage(page + 1, e)
+            }
             data-testid="next"
             aria-label="next page"
           >
