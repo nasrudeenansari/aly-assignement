@@ -4,6 +4,7 @@ import { useState } from "react";
 import SearchBar from "../searchBar/page";
 import Tabs from "../Tabs/page";
 import Image from "next/image";
+import Pagination from "../Pagination/page";
 
 interface IFilters {
   page: number;
@@ -35,6 +36,7 @@ interface IPhotoSrc {
 }
 interface GalleryProps {
   initialQuery: string;
+  totalPages: number;
   response: {
     next_page: string;
     total_results: number;
@@ -44,10 +46,14 @@ interface GalleryProps {
   };
 }
 
-const Gallary: React.FC<GalleryProps> = ({ response, initialQuery }) => {
-  const [photos, setPhotos] = useState<IPhoto[]>(response.photos || []);
+const Gallary: React.FC<GalleryProps> = ({
+  response,
+  initialQuery,
+  totalPages,
+}) => {
+  const [photos, setPhotos] = useState<IPhoto[]>(response?.photos || []);
   const [filter, setFilters] = useState<IFilters>({
-    page: response.page || 1,
+    page: response?.page || 1,
     query: initialQuery || "",
   });
 
@@ -64,8 +70,11 @@ const Gallary: React.FC<GalleryProps> = ({ response, initialQuery }) => {
       <div className={styles.gallery_wrapper}>
         <p className={styles.result_title}>
           <span>{query}</span> Stock Photos and Images{" "}
-          <span className={styles.result_count}>(840,934)</span>
+          <span className={styles.result_count}>
+            ({response?.total_results})
+          </span>
         </p>
+        <Pagination totalPages={totalPages} page={page} />
       </div>
       <div className={styles.image_gallery}>
         {photos.map((item: IPhoto, idx) => (
