@@ -1,3 +1,4 @@
+import { ChangeEvent, ChangeEventHandler, FormEvent } from "react";
 import styles from "../../app/styles/searchBar.module.css";
 import {
   DropDownIcon,
@@ -6,7 +7,17 @@ import {
   CameraIcon,
 } from "@/public/icons";
 
-const SearchBar: React.FC<{}> = ({}) => {
+interface ISearchBar {
+  onChangeHandler: (value: string) => void;
+  query: string;
+  callAPI: (e: FormEvent<HTMLFormElement>) => void;
+}
+
+const SearchBar: React.FC<ISearchBar> = ({
+  onChangeHandler,
+  query,
+  callAPI,
+}) => {
   return (
     <div className={styles.searchBar_wrapper}>
       <div className={styles.drop_down_box}>
@@ -18,10 +29,18 @@ const SearchBar: React.FC<{}> = ({}) => {
           <DropDownIcon />
         </span>
       </div>
-      <div className={styles.input_box}>
-        <SearchIcon />
-        <input type="text" />
-      </div>
+      <form onSubmit={callAPI} className={styles.input_box}>
+        <button type="submit">
+          <SearchIcon />
+        </button>
+        <input
+          type="text"
+          value={query}
+          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+            onChangeHandler(e.target.value)
+          }
+        />
+      </form>
       <div className={styles.camera_box}>
         <CameraIcon />
         <p>Search by images</p>

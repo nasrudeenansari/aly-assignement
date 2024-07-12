@@ -33,6 +33,11 @@
   width: 90%;
   border-right: 1.5px solid var(--dark);
 }
+.input_box button {
+  background: none;
+  color: var(--dark);
+  border: none;
+}
 .input_box input {
   padding-left: 10px;
   width: 100%;
