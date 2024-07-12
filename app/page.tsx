@@ -5,7 +5,7 @@ import Navbar from "@/components/navbar/page";
 import axios from "axios";
 
 const fetchData = async (query: string | undefined, page: string = "1") => {
-  let apiUrl = `https://simple-pexels-proxy.onrender.com/search?query=${query}&per_page=5&page=${page}`;
+  let apiUrl = `https://simple-pexels-proxy.onrender.com/search?query=${query}&per_page=10&page=${page}`;
 
   try {
     const { data } = await axios.get(apiUrl);

@@ -3,48 +3,9 @@ import styles from "../../app/styles/gallery.module.css";
 import { useState } from "react";
 import SearchBar from "../searchBar/page";
 import Tabs from "../Tabs/page";
-import Image from "next/image";
 import Pagination from "../Pagination/page";
-
-interface IFilters {
-  page: number;
-  query: string;
-}
-
-interface IPhoto {
-  id: String;
-  width: number;
-  height: number;
-  url: string;
-  photographer: string;
-  photographer_url: string;
-  photographer_id: number;
-  avg_color: string;
-  src: IPhotoSrc;
-  liked: boolean;
-  alt: string;
-}
-interface IPhotoSrc {
-  landscape: string;
-  large: string;
-  large2x: string;
-  medium: string;
-  original: string;
-  portrait: string;
-  small: string;
-  tiny: string;
-}
-interface GalleryProps {
-  initialQuery: string;
-  totalPages: number;
-  response: {
-    next_page: string;
-    total_results: number;
-    page: number;
-    per_page: number;
-    photos: IPhoto[];
-  };
-}
+import { GalleryProps, IPhoto, IFilters } from "./interface";
+import { ImageGrid } from "../ImageGrid/page";
 
 const Gallary: React.FC<GalleryProps> = ({
   response,
@@ -94,19 +55,8 @@ const Gallary: React.FC<GalleryProps> = ({
             </p>
             <Pagination totalPages={totalPages} page={page} />
           </div>
-          <div className={styles.image_gallery}>
-            {photos.map((item: IPhoto, idx) => (
-              <div className={styles.image_container} key={idx}>
-                <Image
-                  src={item.src.original}
-                  alt={item.alt}
-                  width={item.width}
-                  height={item.height}
-                  loading="lazy"
-                />
-              </div>
-            ))}
-          </div>
+          <ImageGrid imageData={photos} columns={3} />
+
           <div className={styles.next_page_btn}>
             <button
               onClick={(e: React.MouseEvent<HTMLElement>) =>
