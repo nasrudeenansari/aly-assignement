@@ -36,3 +36,6 @@
   display: block;
   object-fit: cover;
 }
+.result_title {
+  text-transform: capitalize;
+}

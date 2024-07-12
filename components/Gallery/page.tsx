@@ -1,45 +1,57 @@
 "use client";
 import styles from "../../app/styles/gallery.module.css";
-import mockJson from "../../app/mock.json";
-import { FormEvent, useEffect, useState } from "react";
-import axios from "axios";
+import { useState } from "react";
 import SearchBar from "../searchBar/page";
 import Tabs from "../Tabs/page";
+import Image from "next/image";
 
 interface IFilters {
   page: number;
   query: string;
 }
-const Gallary: React.FC<{}> = ({}) => {
-  const [photos, setPhotos] = useState<any>([]);
+
+interface IPhoto {
+  id: String;
+  width: number;
+  height: number;
+  url: string;
+  photographer: string;
+  photographer_url: string;
+  photographer_id: number;
+  avg_color: string;
+  src: IPhotoSrc;
+  liked: boolean;
+  alt: string;
+}
+interface IPhotoSrc {
+  landscape: string;
+  large: string;
+  large2x: string;
+  medium: string;
+  original: string;
+  portrait: string;
+  small: string;
+  tiny: string;
+}
+interface GalleryProps {
+  initialQuery: string;
+  response: {
+    next_page: string;
+    total_results: number;
+    page: number;
+    per_page: number;
+    photos: IPhoto[];
+  };
+}
+
+const Gallary: React.FC<GalleryProps> = ({ response, initialQuery }) => {
+  const [photos, setPhotos] = useState<IPhoto[]>(response.photos || []);
   const [filter, setFilters] = useState<IFilters>({
-    page: 1,
-    query: "",
+    page: response.page || 1,
+    query: initialQuery || "",
   });
 
   const { query, page } = filter; // Destructuring
-
-  let customArray = mockJson.photos.map((item) => ({
-    src: item.src.original,
-    width: item.width,
-    height: item.height,
-  }));
-
-  const callAPI = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    let apiUrl = `/api/search?query=${query}&per_page=5&page=${page}`;
-
-    try {
-      const { data } = await axios.get(apiUrl);
-      console.log(data, "sdfds");
-    } catch (error) {
-      if (axios.isAxiosError(error)) {
-        alert(error.message);
-      } else {
-        alert("Something went wrong...");
-      }
-    }
-  };
 
   const onChangeHandler = (value: string) => {
     setFilters((prev) => ({ ...prev, query: value }));
@@ -47,22 +59,24 @@ const Gallary: React.FC<{}> = ({}) => {
 
   return (
     <>
-      <SearchBar
-        onChangeHandler={onChangeHandler}
-        query={query}
-        callAPI={callAPI}
-      />
+      <SearchBar onChangeHandler={onChangeHandler} query={query} />
       <Tabs />
       <div className={styles.gallery_wrapper}>
         <p className={styles.result_title}>
-          Cars Creative Stock Photos and Images{" "}
+          <span>{query}</span> Stock Photos and Images{" "}
           <span className={styles.result_count}>(840,934)</span>
         </p>
       </div>
       <div className={styles.image_gallery}>
-        {customArray.map((item, idx) => (
+        {photos.map((item: IPhoto, idx) => (
           <div className={styles.image_container} key={idx}>
-            <img src={item.src} />
+            <Image
+              src={item.src.original}
+              alt={item.alt}
+              width={item.width}
+              height={item.height}
+              loading="lazy"
+            />
           </div>
         ))}
       </div>
