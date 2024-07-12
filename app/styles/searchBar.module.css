@@ -1,0 +1,58 @@
+.searchBar_wrapper {
+  color: var(--dark);
+  display: flex;
+  align-items: center;
+  /* flex-wrap: wrap; */
+  padding: 0px 20px;
+  width: 100%;
+  border-bottom: 1.5px solid var(--dark);
+}
+
+.drop_down_box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  padding: 16px 0;
+  border-right: 1.5px solid var(--dark);
+  min-width: 220px;
+}
+.drop_down_box p {
+  display: flex;
+  gap: 10px;
+  font-weight: 600;
+  margin-right: 20px;
+}
+.drop_down_box span {
+  margin-right: 20px;
+}
+.input_box {
+  padding-left: 20px;
+  display: flex;
+  align-items: center;
+  width: 90%;
+  border-right: 1.5px solid var(--dark);
+}
+.input_box input {
+  padding-left: 10px;
+  width: 100%;
+  color: var(--dark);
+  background: transparent;
+  border: none;
+  height: 56px;
+  font-size: 18px;
+}
+
+.input_box input:focus {
+  outline: none;
+}
+.camera_box {
+  min-width: max-content;
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+}
+
+.camera_box p {
+  padding-left: 10px;
+}

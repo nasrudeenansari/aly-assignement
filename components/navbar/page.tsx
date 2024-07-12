@@ -1,4 +1,3 @@
-import Image from "next/image";
 import styles from "../../app/styles/navbar.module.css";
 import { LightBoxesIcon, CartIcon } from "@/public/icons";
 
