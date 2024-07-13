@@ -18,7 +18,7 @@ const SearchBar: React.FC<ISearchBar> = ({ onChangeHandler, query }) => {
       <div className={styles.drop_down_box}>
         <p>
           <ImageIcon />
-          All Images
+          <span className={styles.drop_down_title}>All Images</span>
         </p>
         <span>
           <DropDownIcon />

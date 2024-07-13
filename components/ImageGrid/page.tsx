@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "../../app/styles/gallery.module.css";
 import { IPhoto } from "../Gallery/interface";
-import { SearchIcon } from "@/public/icons";
+import { ImagesIcon, CartIcon, AddIcon, DownloadIcon } from "@/public/icons";
 
 export const ImageGrid: React.FC<{ imageData: IPhoto[]; columns: number }> = ({
   imageData,
@@ -15,6 +15,27 @@ export const ImageGrid: React.FC<{ imageData: IPhoto[]; columns: number }> = ({
 
   const handleMouseLeave = () => {
     setHoveredId(null);
+  };
+
+  const downloadImage = (url: string, filename: string) => {
+    fetch(url, { method: "GET", headers: {} })
+      .then((response) => {
+        if (response.ok) {
+          return response.blob();
+        }
+        throw new Error("Network response was not ok.");
+      })
+      .then((blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.style.display = "none";
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+      })
+      .catch((err) => console.error("Download error:", err));
   };
 
   const createColumns = () => {
@@ -65,10 +86,22 @@ export const ImageGrid: React.FC<{ imageData: IPhoto[]; columns: number }> = ({
                       <span className="select-none">–</span>
                       <span>{item.alt}</span>
                       <div className={styles.overlay_bottom}>
-                        <span>D</span>
-                        <span>F</span>
-                        <span>+</span>
-                        <span>F</span>
+                        <span>
+                          <CartIcon width={18} />
+                        </span>
+                        <span
+                          onClick={() =>
+                            downloadImage(item.src.original, `${item.id}.jpg`)
+                          }
+                        >
+                          <DownloadIcon />
+                        </span>
+                        <span>
+                          <AddIcon />
+                        </span>
+                        <span>
+                          <ImagesIcon />
+                        </span>
                       </div>
                     </div>
                   </div>

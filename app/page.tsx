@@ -4,7 +4,7 @@ import Footer from "@/components/Footer/page";
 import Navbar from "@/components/navbar/page";
 import axios from "axios";
 
-const fetchData = async (query: string | undefined, page: string = "1") => {
+const fetchData = async (query: string = "car", page: string = "1") => {
   let apiUrl = `https://simple-pexels-proxy.onrender.com/search?query=${query}&per_page=10&page=${page}`;
 
   try {

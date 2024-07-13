@@ -62,3 +62,13 @@
 .go_page_section input:focus {
   outline: none;
 }
+
+@media screen and (max-width: 767px) {
+  .pagination_wrapper {
+    font-size: 14px;
+    justify-content: space-between;
+    padding-left: 0px;
+    padding-right: 0px;
+    width: 100%;
+  }
+}

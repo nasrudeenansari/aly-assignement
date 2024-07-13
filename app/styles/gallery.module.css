@@ -83,19 +83,6 @@
   vertical-align: middle;
   width: 100%;
 }
-/* Responsive layout - makes a two column-layout instead of four columns */
-@media screen and (max-width: 800px) {
-  .column {
-    flex: 50%;
-  }
-}
-
-/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
-@media screen and (max-width: 600px) {
-  .column {
-    flex: 100%;
-  }
-}
 
 .overlay_wrapper {
   display: none;
@@ -139,22 +126,6 @@
   align-items: center;
 }
 
-.overlay_bottom span svg:hover {
-  fill: #fce57e;
-}
-
-.overlay_bottom span svg:hover path {
-  fill: #fce57e;
-}
-
-.overlay_bottom span svg:hover plygon {
-  fill: #fce57e;
-}
-
-.overlay_bottom span svg:hover circle {
-  fill: #fce57e;
-}
-
 .overlay_label {
   background-color: var(--grey);
   border-radius: 2px;
@@ -164,4 +135,37 @@
   font-weight: 500;
   margin-top: 10px;
   display: inline-block;
+}
+
+.overlay_bottom span:nth-child(1) {
+  background-color: rgb(0, 255, 123);
+}
+.overlay_bottom span:nth-child(1) svg path {
+  fill: var(--dark);
+}
+@media screen and (max-width: 767px) {
+  .gallery_wrapper {
+    padding: 10px;
+  }
+  .result_section {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .column {
+    padding: 0;
+  }
+}
+
+/* Responsive layout - makes a two column-layout instead of four columns */
+@media screen and (max-width: 800px) {
+  .column {
+    flex: 50%;
+  }
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .column {
+    flex: 100%;
+  }
 }

@@ -61,3 +61,15 @@
 .camera_box p {
   padding-left: 10px;
 }
+
+@media screen and (max-width: 767px) {
+  .drop_down_box {
+    min-width: 100px;
+  }
+  .drop_down_box .drop_down_title {
+    display: none;
+  }
+  .camera_box p {
+    display: none;
+  }
+}
